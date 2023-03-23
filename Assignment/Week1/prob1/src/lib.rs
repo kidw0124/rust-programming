@@ -25,7 +25,25 @@ impl Player {
     }
 
     pub fn cast_spell(&mut self, mana_cost: u32) -> u32 {
-        unimplemented!("Cast a spell of cost {}", mana_cost)
+        if self.mana.is_some(){
+            if self.mana.unwrap() >= mana_cost {
+                self.mana = Some(self.mana.unwrap() - mana_cost);
+                return mana_cost * 2;
+            }
+            else{
+                return 0;
+            }
+        }
+        else{
+            if self.health >= mana_cost {
+                self.health = self.health - mana_cost;
+                return 0;
+            }
+            else{
+                self.health = 0;
+                return 0;
+            }
+        }
     }
 }
 
